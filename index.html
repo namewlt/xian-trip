@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#b9472d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
+  <title>西安 4天3夜旅行计划</title>
+  <style>
+:root {
+  color-scheme: light;
+  --paper: #f5f0e7;
+  --card: rgba(255, 253, 248, 0.96);
+  --ink: #29251f;
+  --muted: #756d63;
+  --line: #e7ded0;
+  --brand: #b9472d;
+  --brand-dark: #843521;
+  --accent: #d96a3d;
+  --gold: #d8a43b;
+  --teal: #246b67;
+  --green: #39785f;
+  --blue: #386fa4;
+  --shadow: 0 12px 30px rgba(71, 48, 30, 0.09);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at 10% -5%, rgba(217,106,61,.17), transparent 28rem), radial-gradient(circle at 100% 15%, rgba(36,107,103,.12), transparent 30rem), var(--paper);
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+button, input, a { font: inherit; }
+a { color: inherit; text-decoration: none; }
+button { color: inherit; }
+.app-shell { width: min(100%, 760px); margin: 0 auto; padding: 0 14px calc(104px + env(safe-area-inset-bottom)); }
+
+.hero {
+  position: relative; overflow: hidden; margin: 12px 0 18px; padding: 26px 22px 22px;
+  border-radius: 30px; color: #fffaf2;
+  background: linear-gradient(135deg, rgba(112,34,25,.1), rgba(112,34,25,.56)), linear-gradient(145deg, #d36a3d 0%, #b9472d 52%, #8c3324 100%);
+  box-shadow: 0 18px 42px rgba(128,52,35,.24); isolation: isolate;
+}
+.hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; z-index: -1; background: rgba(255,244,220,.12); }
+.hero::before { width: 210px; height: 210px; right: -70px; top: -95px; }
+.hero::after { width: 120px; height: 120px; left: -42px; bottom: -55px; }
+.hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; font-size: 12px; letter-spacing: .08em; color: rgba(255,250,242,.78); }
+.status-dot { display: inline-flex; align-items: center; gap: 7px; }
+.status-dot::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #ffe2a8; box-shadow: 0 0 0 5px rgba(255,226,168,.13); }
+.version { padding: 4px 9px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: rgba(255,255,255,.08); }
+.hero h1 { margin: 0; font-size: clamp(34px, 10vw, 54px); line-height: 1.05; letter-spacing: -.05em; }
+.hero h1 span { font-weight: 500; font-size: .62em; letter-spacing: 0; }
+.hero-sub { margin: 13px 0 20px; font-size: 14px; color: rgba(255,250,242,.82); }
+.countdown { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 14px; border: 1px solid rgba(255,255,255,.19); border-radius: 17px; background: rgba(74,23,17,.18); backdrop-filter: blur(10px); }
+.countdown strong { display: block; font-size: 17px; line-height: 1.35; }
+.countdown span { display: block; font-size: 11px; color: rgba(255,250,242,.7); }
+.countdown-route { flex: 0 0 auto; text-align: right; font-size: 12px; color: rgba(255,250,242,.84); }
+.hero-actions { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-top: 12px; }
+.hero-action { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px; border: 1px solid rgba(255,255,255,.17); border-radius: 14px; background: rgba(255,255,255,.1); color: #fffaf2; font-size: 12px; cursor: pointer; }
+.hero-action:active { transform: scale(.98); background: rgba(255,255,255,.17); }
+
+.view { display: none; animation: fade-up .28s ease both; }
+.view.is-active { display: block; }
+@keyframes fade-up { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin: 26px 2px 11px; }
+.section-head h2 { margin: 0; font-size: 21px; line-height: 1.2; }
+.section-head p { margin: 0; color: var(--muted); font-size: 12px; text-align: right; }
+.section-kicker { margin: 0 2px 6px; color: var(--brand); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.card { margin: 10px 0; padding: 17px; border: 1px solid rgba(231,222,208,.95); border-radius: 22px; background: var(--card); box-shadow: var(--shadow); backdrop-filter: blur(8px); }
+.card.compact { padding: 14px; }
+.card.alert { border-color: #efc7a9; background: linear-gradient(145deg,#fff8ed,#fffdf8); }
+.card.danger { border-color: #ebc4c0; background: linear-gradient(145deg,#fff6f4,#fffdf8); }
+.card.teal { border-color: #c4ddd9; background: linear-gradient(145deg,#f2faf7,#fffdf8); }
+.card-title { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; font-weight: 800; line-height: 1.35; }
+.card-title small { color: var(--muted); font-weight: 500; }
+.card p { margin: 6px 0; color: #514b43; font-size: 14px; }
+.muted { color: var(--muted) !important; }
+.small { font-size: 12px !important; }
+.strong { font-weight: 800; }
+.spaced { margin-top: 12px !important; }
+
+.pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.pill { display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.75); color: #5e574f; font-size: 11px; white-space: nowrap; }
+.pill.brand { border-color: #ecc6b4; background: #fff4ed; color: var(--brand-dark); }
+.pill.green { border-color: #c7ded3; background: #f0f8f4; color: var(--green); }
+.pill.blue { border-color: #c7d9eb; background: #f0f6fb; color: var(--blue); }
+.pill.gold { border-color: #ead8ad; background: #fff9e9; color: #8b6417; }
+
+.metric-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; margin-top: 10px; }
+.metric { padding: 10px 8px; border-radius: 15px; background: #f8f3ea; text-align: center; }
+.metric strong { display: block; font-size: 16px; line-height: 1.25; }
+.metric span { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
+
+.transport-card { position: relative; overflow: hidden; padding-left: 20px; }
+.transport-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 6px; background: var(--brand); }
+.transport-card.return::before { background: var(--teal); }
+.transport-route { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin: 10px 0 9px; }
+.transport-route strong { font-size: 20px; line-height: 1.2; }
+.transport-route span { color: var(--muted); font-size: 11px; text-align: center; }
+.transport-line { color: var(--brand); font-weight: 900; }
+.return .transport-line { color: var(--teal); }
+
+.day-card { position: relative; margin: 12px 0; padding: 18px; border: 1px solid var(--line); border-radius: 24px; background: var(--card); box-shadow: var(--shadow); overflow: hidden; }
+.day-card::after { content: attr(data-day); position: absolute; right: 10px; top: -12px; color: rgba(185,71,45,.065); font-size: 72px; font-weight: 900; line-height: 1; pointer-events: none; }
+.day-card.is-today { border-color: #e1a989; box-shadow: 0 15px 35px rgba(185,71,45,.16); }
+.today-badge { display: none; float: right; padding: 4px 8px; border-radius: 999px; background: var(--brand); color: white; font-size: 10px; font-weight: 800; }
+.day-card.is-today .today-badge { display: inline-flex; }
+.day-head { position: relative; z-index: 1; }
+.day-date { margin: 0; color: var(--brand); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+.day-head h3 { margin: 3px 0 6px; font-size: 20px; line-height: 1.3; }
+.day-summary { margin: 0; color: var(--muted); font-size: 12px; }
+.timeline { position: relative; margin-top: 14px; padding-left: 2px; }
+.timeline-item { position: relative; display: grid; grid-template-columns: 58px 14px 1fr; gap: 8px; min-height: 48px; padding-bottom: 11px; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-time { color: #6b6258; font-size: 11px; font-weight: 800; line-height: 1.45; }
+.timeline-track { position: relative; display: flex; justify-content: center; }
+.timeline-track::before { content: ""; position: absolute; top: 8px; bottom: -15px; width: 1px; background: #e7ddd1; }
+.timeline-item:last-child .timeline-track::before { display: none; }
+.timeline-track::after { content: ""; position: relative; z-index: 1; width: 9px; height: 9px; margin-top: 5px; border: 2px solid #fff; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 1px #e6b296; }
+.timeline-copy { font-size: 13px; color: #4b453e; }
+.timeline-copy strong { display: block; color: var(--ink); font-size: 14px; }
+.timeline-copy span { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
+.callout { margin-top: 13px; padding: 11px 12px; border-radius: 14px; background: #f8f2e8; color: #61594f; font-size: 12px; }
+.callout.warn { background: #fff0e8; color: #7a3e2f; }
+.callout.safe { background: #edf8f3; color: #315f4d; }
+
+.food-grid { display: grid; gap: 10px; }
+.food-group { padding: 15px; border: 1px solid var(--line); border-radius: 19px; background: var(--card); }
+.food-group h3 { margin: 0 0 7px; font-size: 16px; }
+.food-list { margin: 0; padding: 0; list-style: none; }
+.food-list li { display: grid; grid-template-columns: 6px 1fr; gap: 8px; padding: 6px 0; border-bottom: 1px dashed #ece4d8; font-size: 13px; }
+.food-list li:last-child { border-bottom: 0; }
+.food-list li::before { content: ""; width: 6px; height: 6px; margin-top: 8px; border-radius: 50%; background: var(--accent); }
+.food-list b { color: var(--ink); }
+.avoid { display: grid; gap: 7px; margin: 10px 0 0; }
+.avoid-item { padding: 8px 10px; border-radius: 12px; background: #f8f0ed; color: #783e33; font-size: 12px; }
+
+.budget { width: 100%; border-collapse: collapse; font-size: 12px; }
+.budget th, .budget td { padding: 9px 5px; border-bottom: 1px solid #ece4d8; text-align: left; vertical-align: top; }
+.budget th { color: var(--muted); font-size: 10px; font-weight: 800; }
+.budget td:last-child, .budget th:last-child { text-align: right; white-space: nowrap; }
+
+.progress-track { width: 100%; height: 8px; overflow: hidden; border-radius: 999px; background: #eae1d5; }
+.progress-bar { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg,var(--accent),var(--brand)); transition: width .25s ease; }
+.check-group { margin-top: 17px; }
+.check-group h3 { margin: 0 0 4px; font-size: 15px; }
+.check-item { display: flex; align-items: flex-start; gap: 10px; min-height: 42px; padding: 9px 2px; border-bottom: 1px dashed #e8dfd3; cursor: pointer; font-size: 13px; }
+.check-item:last-child { border-bottom: 0; }
+.check-item input { width: 21px; height: 21px; margin: 0; flex: 0 0 auto; accent-color: var(--brand); }
+.check-item input:checked + span { color: #978e83; text-decoration: line-through; }
+
+.source-note { margin: 22px 2px 0; color: #8a8177; font-size: 10px; text-align: center; }
+.bottom-nav { position: fixed; z-index: 50; left: 50%; bottom: max(10px, env(safe-area-inset-bottom)); transform: translateX(-50%); display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); width: min(calc(100% - 24px),740px); padding: 7px; border: 1px solid rgba(225,214,199,.88); border-radius: 23px; background: rgba(255,253,248,.92); box-shadow: 0 13px 38px rgba(64,42,27,.18); backdrop-filter: blur(18px); }
+.nav-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-width: 0; min-height: 53px; border: 0; border-radius: 17px; background: transparent; color: #7a7167; cursor: pointer; font-size: 10px; }
+.nav-icon { font-size: 19px; line-height: 1.1; }
+.nav-btn.is-active { background: #f5e8dd; color: var(--brand-dark); font-weight: 800; }
+
+.link-btn, .copy-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 38px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 13px; background: #fff; color: #514a42; font-size: 12px; font-weight: 700; cursor: pointer; }
+.link-btn.primary { border-color: var(--brand); background: var(--brand); color: white; }
+.action-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.toast { position: fixed; z-index: 100; left: 50%; bottom: calc(94px + env(safe-area-inset-bottom)); transform: translate(-50%,20px); padding: 9px 14px; border-radius: 999px; background: #2f2b27; color: #fff; font-size: 12px; opacity: 0; pointer-events: none; transition: .22s ease; }
+.toast.show { opacity: 1; transform: translate(-50%,0); }
+
+details.accordion { margin-top: 10px; border: 1px solid var(--line); border-radius: 17px; background: rgba(255,255,255,.63); overflow: hidden; }
+details.accordion summary { padding: 12px 14px; cursor: pointer; font-size: 13px; font-weight: 800; list-style: none; }
+details.accordion summary::-webkit-details-marker { display: none; }
+details.accordion summary::after { content: "＋"; float: right; color: var(--muted); }
+details.accordion[open] summary::after { content: "－"; }
+details.accordion .accordion-body { padding: 0 14px 13px; color: #5d564e; font-size: 12px; }
+
+@media (min-width: 620px) {
+  .app-shell { padding-left: 24px; padding-right: 24px; }
+  .food-grid { grid-template-columns: 1fr 1fr; }
+  .card { padding: 20px; }
+  .day-card { padding: 21px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+@media print {
+  body { background: #fff; }
+  .app-shell { width: 100%; padding: 0; }
+  .hero { color: #111; background: #fff; box-shadow: none; border: 1px solid #ddd; }
+  .hero::before, .hero::after, .bottom-nav, .hero-actions { display: none; }
+  .view { display: block !important; page-break-before: always; }
+  .card, .day-card, .food-group { box-shadow: none; break-inside: avoid; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div class="hero-top">
+        <span class="status-dot">2026.10.01—10.05</span>
+        <span class="version">终版</span>
+      </div>
+      <h1>西安 <span>4天3夜</span></h1>
+      <p class="hero-sub">双人美食重点版 · 公交优先 · 必去西安交大</p>
+      <div class="countdown">
+        <div>
+          <strong id="countdownText">正在计算行程状态</strong>
+          <span id="todayText">按北京时间显示</span>
+        </div>
+        <div class="countdown-route">济南 ⇄ 西安<br>2 人</div>
+      </div>
+      <div class="hero-actions">
+        <button class="hero-action" type="button" data-go="itinerary">📅 看行程</button>
+        <button class="hero-action" type="button" data-go="transport">🚆 车票</button>
+        <button class="hero-action" type="button" data-go="checklist">✅ 清单</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview" class="view is-active" aria-label="总览">
+        <div class="section-kicker">Overview</div>
+        <div class="section-head">
+          <h2>先看重点</h2>
+          <p>按安全优先级排序</p>
+        </div>
+
+        <article class="card alert">
+          <div class="card-title"><span>🔁 本次最重要的调整</span><span class="pill brand">10 月 4 日</span></div>
+          <p><span class="strong">先在西安北站寄存行李，再去大雁塔和大唐不夜城，晚上回西安北附近过夜。</span>这样 10 月 5 日不需要从灞桥区凌晨赶首班公交，是全程最稳妥的安排。</p>
+        </article>
+
+        <article class="card danger">
+          <div class="card-title"><span>🛡️ 通宵安全规则</span><span class="pill">必须照做</span></div>
+          <p>两人轮流休息，始终保留一人清醒看行李。每小时轮换一次；不要进入偏僻、封闭或无人看管的区域。</p>
+          <p class="small muted">如出现发烧、持续腹痛、头晕、呼吸困难或严重受寒，立即中止通宵，优先找安全住宿。</p>
+        </article>
+
+        <div class="section-head">
+          <h2>关键信息</h2>
+          <p>截图核对版</p>
+        </div>
+
+        <article class="card compact">
+          <div class="card-title"><span>🏠 半山度民宿（思源学院店）</span><span class="pill green">已订</span></div>
+          <p>温馨大床房 · 宜住 2 人 · 10/2 14:00 入住，10/4 12:00 退房</p>
+          <p class="small muted">陕西省西安市灞桥区水安路 28 号 · 2 晚 ¥232 · 无早餐</p>
+          <div class="action-row">
+            <button class="copy-btn" type="button" data-copy="陕西省西安市灞桥区水安路28号 半山度民宿（思源学院店）">复制地址</button>
+            <a class="link-btn" href="https://uri.amap.com/search?keyword=%E5%8D%8A%E5%B1%B1%E5%BA%A6%E6%B0%91%E5%AE%BF%EF%BC%88%E6%80%9D%E6%BA%90%E5%AD%A6%E9%99%A2%E5%BA%97%EF%BC%89&city=%E8%A5%BF%E5%AE%89" target="_blank" rel="noreferrer">地图导航</a>
+          </div>
+          <details class="accordion">
+            <summary>酒店取消与入住提醒</summary>
+            <div class="accordion-body">10 月 2 日 18:00 前可免费取消。到达时间通常早于 14:00，先联系房东确认寄存或提前入住；雨天不要拖着大件行李长时间步行。</div>
+          </details>
+        </article>
+
+        <div class="metric-grid">
+          <div class="metric"><strong>Z105</strong><span>济南 → 西安</span></div>
+          <div class="metric"><strong>2 晚</strong><span>10/2—10/4</span></div>
+          <div class="metric"><strong>D1676</strong><span>西安北 → 济南东</span></div>
+        </div>
+
+        <article class="card teal">
+          <div class="card-title"><span>🎯 出发前必须确认</span><span class="pill blue">7 项</span></div>
+          <div class="pill-row">
+            <span class="pill">陈涵车票</span><span class="pill">交大预约</span><span class="pill">博物馆预约</span>
+            <span class="pill">首末班车</span><span class="pill">西安北寄存</span><span class="pill">24h 过夜点</span><span class="pill">天气保暖</span>
+          </div>
+          <p class="small spaced muted">国庆期间实时变化较多，出发前 30 分钟再看一次地图和官方通知。</p>
+        </article>
+
+        <article class="card">
+          <div class="card-title"><span>💰 预算提醒</span><span class="pill gold">不含铁路</span></div>
+          <p>2 人在地预算约 <span class="strong">970—1,800 元</span>，人均约 <span class="strong">485—900 元</span>。住宿 ¥232 已确认，铁路票款以 12306 实际订单为准。</p>
+          <p class="small muted">至少保留人均 100 元应急金；不值得为了省几十元承担误车或健康风险。</p>
+          <div class="action-row"><button class="copy-btn" type="button" data-go="budget">查看预算与应急</button></div>
+        </article>
+      </section>
+      <section id="itinerary" class="view" aria-label="每日行程">
+        <div class="section-kicker">Daily Plan</div>
+        <div class="section-head"><h2>每日行程</h2><p>点击查看时间线</p></div>
+
+        <article class="day-card" id="day1" data-day="01">
+          <div class="today-badge">今天</div>
+          <div class="day-head"><p class="day-date">10 月 1 日 · 周四</p><h3>济南出发，硬座过夜</h3><p class="day-summary">Z105 · 济南 18:42 → 西安次日 07:28</p></div>
+          <div class="timeline">
+            <div class="timeline-item"><div class="timeline-time">16:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>到达济南站附近</strong><span>晚饭、补水、充电，检查证件和车票</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">17:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>安检进站</strong><span>确认 6B7B 检票口，保存订单截图</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">18:42</div><div class="timeline-track"></div><div class="timeline-copy"><strong>乘坐 Z105</strong><span>14 车 011 硬座</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">夜间</div><div class="timeline-track"></div><div class="timeline-copy"><strong>两人轮流休息</strong><span>贵重物品贴身，不同时睡熟</span></div></div>
+          </div>
+          <div class="callout warn">硬座保命包：颈枕、耳塞、眼罩、厚外套、湿巾、充电宝、保温杯。</div>
+        </article>
+
+        <article class="day-card" id="day2" data-day="02">
+          <div class="today-badge">今天</div>
+          <div class="day-head"><p class="day-date">10 月 2 日 · 周五</p><h3>抵达西安，雨天恢复日</h3><p class="day-summary">小雨转中雨（需复核）· 抵达、寄存、补觉</p></div>
+          <div class="timeline">
+            <div class="timeline-item"><div class="timeline-time">07:28</div><div class="timeline-track"></div><div class="timeline-copy"><strong>西安站下车</strong><span>清点行李，先吃热早餐</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">08:20</div><div class="timeline-track"></div><div class="timeline-copy"><strong>乘 240 路方向公交</strong><span>目的地思源学院/民宿，以当天导航为准</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">09:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>民宿寄存行李</strong><span>联系房东，能提前入住就优先洗澡</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">10:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>早午餐＋采购</strong><span>水、雨衣、纸巾和次日早餐</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">14:00</div><div class="timeline-track"></div><div class="timeline-copy"><strong>办理入住并补觉</strong><span>闹钟设 17:00，避免睡到深夜</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">17:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>民宿附近晚餐</strong><span>雨停可短走，持续下雨则回房休息</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">21:00</div><div class="timeline-track"></div><div class="timeline-copy"><strong>准备次日路线</strong><span>交大预约、地图离线缓存、充电</span></div></div>
+          </div>
+          <div class="callout safe">核心目标不是打卡，而是安全抵达、吃好、睡够。</div>
+        </article>
+
+        <article class="day-card" id="day3" data-day="03">
+          <div class="today-badge">今天</div>
+          <div class="day-head"><p class="day-date">10 月 3 日 · 周六</p><h3>西安交大＋回坊美食＋钟楼夜景</h3><p class="day-summary">交大必去 · 洒金桥/大皮院/西羊市 · 20:30 开始返程</p></div>
+          <div class="timeline">
+            <div class="timeline-item"><div class="timeline-time">07:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>出发去交大兴庆校区</strong><span>预留 1—1.5 小时通勤</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">09:00</div><div class="timeline-track"></div><div class="timeline-copy"><strong>西安交大入校</strong><span>以官方预约和访客规则为准</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">11:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>交大周边午餐</strong><span>本湘湖南小厨、铁蛋鸡汤刀削面等</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">13:00</div><div class="timeline-track"></div><div class="timeline-copy"><strong>兴庆宫公园</strong><span>免费；交大无法入校时直接改走这里</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">14:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>地铁前往洒金桥</strong><span>再接大皮院、西羊市，少量多样</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">17:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>钟楼/鼓楼外围</strong><span>看夜景，不必为赶景点登楼</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">20:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>安全底线：开始返程</strong><span>先查末班车，宁可少逛不可冒险</span></div></div>
+          </div>
+          <div class="callout warn">若一定要吃上午售罄的早餐类，应先去洒金桥，再把交大改到下午；国庆不建议为了单一店铺打乱整天动线。</div>
+        </article>
+        <article class="day-card" id="day4" data-day="04">
+          <div class="today-badge">今天</div>
+          <div class="day-head"><p class="day-date">10 月 4 日 · 周日</p><h3>退房、西安北寄存、夜景与低成本过夜</h3><p class="day-summary">先解决行李与过夜点，再去大雁塔和大唐不夜城</p></div>
+          <div class="timeline">
+            <div class="timeline-item"><div class="timeline-time">08:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>退房出发</strong><span>行李锁好，证件与充电器单独清点</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">10:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>西安北站寄存行李</strong><span>优先官方寄存/自助柜，贵重物品随身</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">11:00</div><div class="timeline-track"></div><div class="timeline-copy"><strong>地铁 4 号线去大雁塔</strong><span>以实时导航为准</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">12:00</div><div class="timeline-track"></div><div class="timeline-copy"><strong>大雁塔/小寨午餐</strong><span>控制预算和排队时间</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">13:00</div><div class="timeline-track"></div><div class="timeline-copy"><strong>大雁塔北广场与大慈恩寺外围</strong><span>免费区域为主</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">15:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>休息、充电、热饮</strong><span>为晚上和通宵保留体力</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">18:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>大唐不夜城步行</strong><span>只看免费夜景，不买高价拍照套餐</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">19:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>地铁返回西安北</strong><span>不要挑战末班车</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">22:00</div><div class="timeline-track"></div><div class="timeline-copy"><strong>西安北附近轮休过夜</strong><span>站内休息区优先，其次 24h 快餐店</span></div></div>
+          </div>
+          <div class="callout safe">最低消费买热饮占座，不为“免费”进入不安全区域。身体不适立刻改住钟点房。</div>
+        </article>
+
+        <article class="day-card" id="day5" data-day="05">
+          <div class="today-badge">今天</div>
+          <div class="day-head"><p class="day-date">10 月 5 日 · 周一</p><h3>西安北返程</h3><p class="day-summary">D1676 · 西安北 09:57 → 济南东 17:53</p></div>
+          <div class="timeline">
+            <div class="timeline-item"><div class="timeline-time">05:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>起床整理</strong><span>证件、行李、充电设备最后清点</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">06:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>前往西安北站</strong><span>已在附近则短途公交或步行</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">07:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>候车休息</strong><span>早餐、补觉、充电</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">09:30</div><div class="timeline-track"></div><div class="timeline-copy"><strong>前往 18A 检票口</strong><span>提前 20—30 分钟到位</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">09:57</div><div class="timeline-track"></div><div class="timeline-copy"><strong>乘坐 D1676</strong><span>02 车 13D 二等座</span></div></div>
+            <div class="timeline-item"><div class="timeline-time">17:53</div><div class="timeline-track"></div><div class="timeline-copy"><strong>到达济南东</strong><span>检查座位和行李，行程结束</span></div></div>
+          </div>
+        </article>
+      </section>
+      <section id="transport" class="view" aria-label="交通与酒店">
+        <div class="section-kicker">Transport</div>
+        <div class="section-head"><h2>交通与住宿</h2><p>截图已核对</p></div>
+
+        <article class="card transport-card">
+          <div class="card-title"><span>去程 · Z105</span><span class="pill brand">10 月 1 日</span></div>
+          <div class="transport-route"><div><strong>18:42</strong><span>济南</span></div><div class="transport-line">━━━→</div><div style="text-align:right"><strong>07:28</strong><span>西安 · 次日</span></div></div>
+          <p><span class="strong">14 车 011 硬座</span> · 6B7B 检票口 · 历时 12 小时 46 分</p>
+          <p class="small muted">需确认陈涵车票已购买，尽量安排同车厢或附近座位。</p>
+        </article>
+
+        <article class="card transport-card return">
+          <div class="card-title"><span>返程 · D1676</span><span class="pill blue">10 月 5 日</span></div>
+          <div class="transport-route"><div><strong>09:57</strong><span>西安北</span></div><div class="transport-line">━━━→</div><div style="text-align:right"><strong>17:53</strong><span>济南东</span></div></div>
+          <p><span class="strong">02 车 13D 二等座</span> · 18A 检票口 · 历时 7 小时 56 分</p>
+          <p class="small muted">途经大荔、运城北、侯马西等站。</p>
+        </article>
+
+        <article class="card">
+          <div class="card-title"><span>🚇 市内交通原则</span><span class="pill green">公交/地铁</span></div>
+          <p>民宿位于灞桥区，去回坊、钟楼、大雁塔都要预留 <span class="strong">1—2 小时</span>。每次出发前复核实时路线和末班时间。</p>
+          <div class="pill-row"><span class="pill">20:30 开始返程</span><span class="pill">19:30 离开大唐不夜城</span><span class="pill">地铁优先</span><span class="pill">不做黑车</span></div>
+          <div class="callout warn">若夜间身体不适或公共交通中断，安全优先，可破例打车；这比在陌生区域硬撑更合理。</div>
+        </article>
+
+        <article class="card">
+          <div class="card-title"><span>🧳 10 月 4 日策略</span><span class="pill gold">关键</span></div>
+          <p>优先使用西安北站官方行李寄存或自助柜。贵重物品随身，行李箱上锁并拍照记录。</p>
+          <p class="small muted">若寄存不可用，减少购物并保持随身行李轻量，不要带着大件行李挤晚高峰。</p>
+        </article>
+
+        <article class="card teal">
+          <div class="card-title"><span>🏠 住宿</span><span class="pill green">¥232 / 2 晚</span></div>
+          <p>半山度民宿（思源学院店）<br>温馨大床房 · 20㎡ · 1 床 1 卫 · 宜住 2 人</p>
+          <p class="small muted">灞桥区水安路 28 号 · 10/2 14:00 入住 · 10/4 12:00 退房 · 无早餐</p>
+          <div class="action-row">
+            <button class="copy-btn" type="button" data-copy="陕西省西安市灞桥区水安路28号 半山度民宿（思源学院店）">复制地址</button>
+            <a class="link-btn primary" href="https://uri.amap.com/search?keyword=%E5%8D%8A%E5%B1%B1%E5%BA%A6%E6%B0%91%E5%AE%BF%EF%BC%88%E6%80%9D%E6%BA%90%E5%AD%A6%E9%99%A2%E5%BA%97%EF%BC%89&city=%E8%A5%BF%E5%AE%89" target="_blank" rel="noreferrer">打开地图</a>
+          </div>
+        </article>
+      </section>
+
+      <section id="food" class="view" aria-label="美食">
+        <div class="section-kicker">Food Guide</div>
+        <div class="section-head"><h2>2 人分食地图</h2><p>少量多样</p></div>
+
+        <article class="card alert">
+          <div class="card-title"><span>🚫 严格排除</span><span class="pill brand">点单前核对</span></div>
+          <div class="avoid"><div class="avoid-item">凉皮 · 凉粉 · 柿子饼 · 绿豆糕</div><div class="avoid-item">蒸饺 · 米皮 · 搅团 · 菠菜面</div></div>
+        </article>
+
+        <div class="food-grid">
+          <article class="food-group">
+            <h3>🥇 洒金桥 · 上午优先</h3>
+            <ul class="food-list">
+              <li><div><b>胖子甑糕</b>：1 份分食，通常 09:30 前售罄</div></li>
+              <li><div><b>李唯一肉丸胡辣汤</b>：2 碗＋1 个馍</div></li>
+              <li><div><b>杨天玉腊牛肉夹馍</b>：1 个夹馍＋少量腊牛肉</div></li>
+              <li><div><b>马二酸汤水饺</b>：1 份分食</div></li>
+              <li><div><b>金桥李烙包子</b>：2 个不同口味</div></li>
+            </ul>
+          </article>
+          <article class="food-group">
+            <h3>🥈 大皮院 · 西羊市</h3>
+            <ul class="food-list">
+              <li><div><b>定家小酥肉</b>：1 份＋2 个白饼</div></li>
+              <li><div><b>老米家大雨泡馍</b>：1 份泡馍分食</div></li>
+              <li><div><b>小贾八宝粥</b>：小份尝鲜</div></li>
+              <li><div><b>马洪小炒泡馍馆</b>：1 份小炒泡馍＋冰峰</div></li>
+              <li><div><b>花奶奶酸梅汤</b>：1—2 杯解腻</div></li>
+            </ul>
+          </article>
+          <article class="food-group">
+            <h3>🏫 交大周边</h3>
+            <ul class="food-list">
+              <li><div><b>本湘湖南小厨</b>：两菜一汤，人均约 35 元参考</div></li>
+              <li><div><b>铁蛋鸡汤刀削面</b>：快速午餐，价格实惠</div></li>
+              <li><div><b>老李家 biangbiang 面</b>：钟楼附近，1 份面＋1 配菜</div></li>
+            </ul>
+          </article>
+          <article class="food-group">
+            <h3>🏠 酒店周边</h3>
+            <ul class="food-list">
+              <li><div><b>商记隆江猪脚饭</b>：管饱、便宜</div></li>
+              <li><div><b>啊臻味道米粉</b>：重口味首选</div></li>
+              <li><div><b>韩国哈尼炸鸡 / 盘盘香干锅</b>：两人点一份锅</div></li>
+              <li><div><b>馋莱客</b>：水安路 28 号周边简餐</div></li>
+            </ul>
+          </article>
+        </div>
+
+        <article class="card">
+          <div class="card-title"><span>💡 点单策略</span><span class="pill green">两人版</span></div>
+          <p>每轮只点 1 份主食＋1—2 个小吃，吃完再决定下一家。每餐留 20% 胃容量，排队超过 30 分钟就换同类店。</p>
+          <p class="small muted">部分老店只收现金；价格会受节假日影响，先看价目表再点。</p>
+        </article>
+
+        <article class="card">
+          <div class="card-title"><span>🌅 小南门早市</span><span class="pill">弹性项目</span></div>
+          <p>6:00—9:00 参考时段。肘子夹馍、油茶麻花可小份尝鲜。</p>
+          <p class="small muted">从民宿出发路程较远，不建议为了早市牺牲睡眠或返程安全；起不来直接取消。</p>
+        </article>
+      </section>
+      <section id="checklist" class="view" aria-label="清单">
+        <div class="section-kicker">Checklist</div>
+        <div class="section-head"><h2>出发清单</h2><p id="progressText">0 / 0 完成</p></div>
+        <article class="card">
+          <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+          <div class="check-group">
+            <h3>证件与票务</h3>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="id"><span>两人身份证</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="tickets"><span>Z105、D1676 车票截图</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="hotel"><span>酒店订单及地址页面</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="chen"><span>确认陈涵往返车票</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="campus"><span>西安交大预约结果</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="museum"><span>博物馆/景点预约结果</span></label>
+          </div>
+          <div class="check-group">
+            <h3>随身装备</h3>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="rain"><span>雨伞或轻便雨衣</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="warm"><span>羽绒服/厚抓绒、长裤、厚袜</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="shoes"><span>舒适防滑鞋</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="power"><span>充电宝、数据线、充电头</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="sleep"><span>颈枕、眼罩、耳塞</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="medicine"><span>感冒药、肠胃药、晕车药、创可贴</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="lock"><span>行李锁或扎带</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="cash"><span>100—200 元零钱</span></label>
+          </div>
+          <div class="check-group">
+            <h3>手机与路线</h3>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="offline"><span>下载离线地图和酒店周边地图</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="favorites"><span>收藏酒店、车站、交大、洒金桥、大雁塔位置</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="contacts"><span>保存房东和紧急联系人电话</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="realtime"><span>出发前复核公交、末班车和天气</span></label>
+            <label class="check-item"><input class="trip-check" type="checkbox" data-key="luggage"><span>确认西安北行李寄存和过夜点</span></label>
+          </div>
+          <div class="action-row"><button class="copy-btn" type="button" id="resetChecks">重置全部</button></div>
+        </article>
+        <article class="card danger">
+          <div class="card-title"><span>🛡️ 安全底线</span><span class="pill brand">牢记</span></div>
+          <p>不进入偏僻、封闭或无人看管的过夜区域；两人不同时睡熟；紧急电话 110 / 120 / 12306。</p>
+        </article>
+      </section>
+
+      <section id="budget" class="view" aria-label="预算与应急">
+        <div class="section-kicker">Budget & Safety</div>
+        <div class="section-head"><h2>预算与应急</h2><p>不含铁路票款</p></div>
+        <article class="card">
+          <table class="budget">
+            <thead><tr><th>项目</th><th>2 人预估</th><th>人均</th></tr></thead>
+            <tbody>
+              <tr><td>住宿 2 晚</td><td>¥232</td><td>¥116</td></tr>
+              <tr><td>地铁/公交</td><td>¥100—150</td><td>¥50—75</td></tr>
+              <tr><td>餐饮</td><td>¥600—900</td><td>¥300—450</td></tr>
+              <tr><td>寄存/热饮</td><td>¥70—150</td><td>¥35—75</td></tr>
+              <tr><td>门票/预约</td><td>¥0—200</td><td>¥0—100</td></tr>
+              <tr><td>应急备用金</td><td>¥200—400</td><td>¥100—200</td></tr>
+              <tr><td><b>在地合计</b></td><td><b>¥970—1,800</b></td><td><b>¥485—900</b></td></tr>
+            </tbody>
+          </table>
+          <p class="small spaced muted">铁路往返票款请按 12306 实际订单另行汇总。</p>
+        </article>
+        <article class="card alert">
+          <div class="card-title"><span>🚨 需要立即中止原计划</span><span class="pill brand">安全优先</span></div>
+          <p>发烧、持续腹痛、明显头晕、呼吸困难、严重受寒，或疲劳到无法保持清醒。</p>
+          <p class="small muted">优先找西安北附近可合法短时休息的酒店/钟点房。多花 100—200 元比误车或生病更值得。</p>
+        </article>
+        <article class="card">
+          <div class="card-title"><span>📞 应急电话</span><span class="pill">快捷拨号</span></div>
+          <div class="action-row"><a class="link-btn primary" href="tel:110">报警 110</a><a class="link-btn" href="tel:120">急救 120</a><a class="link-btn" href="tel:12306">铁路 12306</a></div>
+          <details class="accordion"><summary>误车或身份证问题</summary><div class="accordion-body">第一时间查看 12306 改签/退票；不要和陌生人私下交易。需要临时身份证明时去车站服务台或公安制证点。</div></details>
+        </article>
+        <article class="card teal">
+          <div class="card-title"><span>🧭 最后检查</span><span class="pill green">出发前</span></div>
+          <p>打开 12306、地图和天气 App，把车次、检票口、公交末班、酒店信息各核对一次。计划是底线，不是必须全部打卡的任务清单。</p>
+        </article>
+      </section>
+    </main>
+    <p class="source-note">根据 2026-09-30 酒店与铁路订单截图整理 · 出行前请再次核对官方实时信息</p>
+  </div>
+
+  <nav class="bottom-nav" aria-label="页面导航">
+    <button class="nav-btn is-active" type="button" data-view="overview"><span class="nav-icon">⌂</span><span>总览</span></button>
+    <button class="nav-btn" type="button" data-view="itinerary"><span class="nav-icon">📅</span><span>行程</span></button>
+    <button class="nav-btn" type="button" data-view="transport"><span class="nav-icon">🚆</span><span>交通</span></button>
+    <button class="nav-btn" type="button" data-view="food"><span class="nav-icon">🥢</span><span>美食</span></button>
+    <button class="nav-btn" type="button" data-view="checklist"><span class="nav-icon">✅</span><span>清单</span></button>
+  </nav>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+(function () {
+  "use strict";
+  var views = ["overview", "itinerary", "transport", "food", "checklist", "budget"];
+  var viewButtons = document.querySelectorAll("[data-view]");
+  var goButtons = document.querySelectorAll("[data-go]");
+  var toast = document.getElementById("toast");
+  var toastTimer;
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 1500);
+  }
+
+  function showView(name, updateHash) {
+    if (views.indexOf(name) === -1) name = "overview";
+    views.forEach(function (viewName) {
+      var section = document.getElementById(viewName);
+      if (section) section.classList.toggle("is-active", viewName === name);
+    });
+    viewButtons.forEach(function (button) {
+      button.classList.toggle("is-active", button.getAttribute("data-view") === name);
+    });
+    if (updateHash !== false) history.replaceState(null, "", "#" + name);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  viewButtons.forEach(function (button) {
+    button.addEventListener("click", function () { showView(button.getAttribute("data-view")); });
+  });
+  goButtons.forEach(function (button) {
+    button.addEventListener("click", function () { showView(button.getAttribute("data-go")); });
+  });
+  showView(location.hash ? location.hash.slice(1) : "overview", false);
+
+  document.querySelectorAll("[data-copy]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var text = button.getAttribute("data-copy");
+      function fallbackCopy() {
+        var area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+        try { document.execCommand("copy"); } catch (error) { showToast("请手动复制地址"); }
+        document.body.removeChild(area);
+        showToast("已复制");
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { showToast("已复制"); }).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    });
+  });
+
+  var checks = document.querySelectorAll(".trip-check");
+  var progressText = document.getElementById("progressText");
+  var progressBar = document.getElementById("progressBar");
+  var storageKey = "xian-trip-checklist-v1";
+
+  function readChecks() {
+    try { return JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch (error) { return {}; }
+  }
+
+  function updateProgress() {
+    var done = 0;
+    checks.forEach(function (check) { if (check.checked) done += 1; });
+    var total = checks.length;
+    progressText.textContent = done + " / " + total + " 完成";
+    progressBar.style.width = (total ? Math.round(done / total * 100) : 0) + "%";
+  }
+
+  function saveChecks() {
+    var data = {};
+    checks.forEach(function (check) { data[check.getAttribute("data-key")] = check.checked; });
+    try { localStorage.setItem(storageKey, JSON.stringify(data)); } catch (error) {}
+    updateProgress();
+  }
+
+  var stored = readChecks();
+  checks.forEach(function (check) {
+    check.checked = Boolean(stored[check.getAttribute("data-key")]);
+    check.addEventListener("change", saveChecks);
+  });
+  updateProgress();
+
+  document.getElementById("resetChecks").addEventListener("click", function () {
+    checks.forEach(function (check) { check.checked = false; });
+    saveChecks();
+    showToast("清单已重置");
+  });
+
+  var dayIds = {
+    "2026-10-01": "day1", "2026-10-02": "day2", "2026-10-03": "day3",
+    "2026-10-04": "day4", "2026-10-05": "day5"
+  };
+  var countdownText = document.getElementById("countdownText");
+  var todayText = document.getElementById("todayText");
+  var startDate = "2026-10-01";
+  var endDate = "2026-10-05";
+
+  function chinaDateKey() {
+    var parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit"
+    }).formatToParts(new Date());
+    var values = {};
+    parts.forEach(function (part) { values[part.type] = part.value; });
+    return values.year + "-" + values.month + "-" + values.day;
+  }
+  function toUtcDay(key) {
+    var pieces = key.split("-").map(Number);
+    return Date.UTC(pieces[0], pieces[1] - 1, pieces[2]);
+  }
+  function formatChineseDate(key) {
+    var pieces = key.split("-");
+    return pieces[1].replace(/^0/, "") + "月" + pieces[2].replace(/^0/, "") + "日";
+  }
+
+  var today = chinaDateKey();
+  var todayDay = toUtcDay(today);
+  var startDay = toUtcDay(startDate);
+  var endDay = toUtcDay(endDate);
+  var oneDay = 86400000;
+
+  if (todayDay < startDay) {
+    var daysLeft = Math.round((startDay - todayDay) / oneDay);
+    countdownText.textContent = daysLeft === 0 ? "今天出发" : "距出发 " + daysLeft + " 天";
+    todayText.textContent = "10 月 1 日 18:42 济南站见";
+  } else if (todayDay > endDay) {
+    countdownText.textContent = "行程已结束";
+    todayText.textContent = "愿这趟西安之旅留下好回忆";
+  } else {
+    countdownText.textContent = "今天是 " + formatChineseDate(today);
+    todayText.textContent = "已自动定位当天行程";
+    var currentDayId = dayIds[today];
+    document.querySelectorAll(".day-card").forEach(function (card) {
+      card.classList.toggle("is-today", card.id === currentDayId);
+    });
+  }
+}());
+
+  </script>
+</body>
+</html>
+
+
